@@ -7,8 +7,12 @@ namespace WebApiControlStock.Validaciones
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            decimal newValue = Convert.ToDecimal(value);
-            if(newValue < 0) {
+            if (value == null || string.IsNullOrEmpty(value.ToString()))
+            {
+                return ValidationResult.Success;
+            }
+
+            if (Convert.ToDecimal(value) > 0) {
                 return ValidationResult.Success;
             }
             return new ValidationResult("El precio debe ser mayor a cero");

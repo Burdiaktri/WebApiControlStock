@@ -8,12 +8,16 @@ namespace WebApiControlStock.Validaciones
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            string newValue = Convert.ToString(value);
-
-            if(newValue == "S" || newValue == "H") {
+            if (value == null || string.IsNullOrEmpty(value.ToString()))
+            {
                 return ValidationResult.Success;
             }
-            return new ValidationResult("Linea de producto solo acepta S o H");
+            if (value.ToString().ToUpper() == "H" || value.ToString().ToUpper() == "S")
+            {
+                return ValidationResult.Success;
+            }
+            return new ValidationResult("Línea de producto solo acepta \"H\" y \"S\"!");
         }
+
     }
 }
